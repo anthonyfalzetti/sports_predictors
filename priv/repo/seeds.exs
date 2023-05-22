@@ -16,6 +16,7 @@ defmodule SportsPredictors.Seeds do
   alias SportsPredictors.Stadiums.Stadium
   alias SportsPredictors.Conferences.Conference
   alias SportsPredictors.Divisions.Division
+  alias SportsPredictors.Teams.Team
   alias SportsPredictors.Repo
 
   def seed_all!() do
@@ -23,6 +24,7 @@ defmodule SportsPredictors.Seeds do
     seed_stadiums!()
     seed_conferences!()
     seed_divisions!()
+    seed_teams!()
   end
 
   defp seed_user!() do
@@ -40,7 +42,8 @@ defmodule SportsPredictors.Seeds do
         record = %{
           name: row["stadium_name"],
           latitude: parse_float(row["LATITUDE"]),
-          longitude: parse_float(row["LONGITUDE"])
+          longitude: parse_float(row["LONGITUDE"]),
+          timezone: row["timezone"]
         }
 
         [record | acc]
@@ -49,6 +52,8 @@ defmodule SportsPredictors.Seeds do
       |> Enum.each(fn stadium ->
         Stadiums.create_stadium(stadium)
       end)
+    else
+      IO.puts("Skipping seeding stadiums")
     end
   end
 
@@ -61,6 +66,8 @@ defmodule SportsPredictors.Seeds do
       |> Enum.each(fn conference ->
         SportsPredictors.Conferences.create_conference(conference)
       end)
+    else
+      IO.puts("Skipping seeding conferences")
     end
   end
 
@@ -79,6 +86,36 @@ defmodule SportsPredictors.Seeds do
           SportsPredictors.Divisions.create_division(division)
         end)
       end)
+    else
+      IO.puts("Skipping seeding divisions")
+    end
+  end
+
+  defp seed_teams!() do
+    if empty?(Team) do
+      load_up_csv("../../../support/teams.csv")
+      |> Enum.reduce([], fn {:ok, row}, acc ->
+        division =
+          SportsPredictors.Divisions.get_stadium_by_conference_and_division_name!(
+            row["conference"],
+            row["division"]
+          )
+
+        record = %{
+          name: row["team"],
+          stadium_id: SportsPredictors.Stadiums.get_stadium_by_name!(row["stadium_name"]).id,
+          division_id: division.id,
+          conference: division.conference_id,
+          current_elo: row["elo"]
+        }
+
+        [record | acc]
+      end)
+      |> Enum.each(fn team ->
+        SportsPredictors.Teams.create_team(team)
+      end)
+    else
+      IO.puts("Skipping seeding teams")
     end
   end
 end

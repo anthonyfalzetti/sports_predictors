@@ -10,11 +10,13 @@ defmodule SportsPredictors.Conferences.Conference do
     timestamps()
   end
 
+  @required_fields ~w(name)a
+
   @doc false
   def changeset(conference, attrs) do
     conference
-    |> cast(attrs, [:name])
+    |> cast(attrs, @required_fields)
     |> unique_constraint(:name)
-    |> validate_required([:name])
+    |> validate_required(@required_fields)
   end
 end

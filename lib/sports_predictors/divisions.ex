@@ -7,6 +7,7 @@ defmodule SportsPredictors.Divisions do
   alias SportsPredictors.Repo
 
   alias SportsPredictors.Divisions.Division
+  alias SportsPredictors.Conferences.Conference
 
   @doc """
   Returns the list of divisions.
@@ -36,6 +37,15 @@ defmodule SportsPredictors.Divisions do
 
   """
   def get_division!(id), do: Repo.get!(Division, id)
+
+  def get_stadium_by_conference_and_division_name!(conference_name, division_name) do
+    Division
+    |> join(:inner, [d], c in Conference, on: d.conference_id == c.id)
+    |> where([d, c], d.name == ^division_name)
+    |> where([d, c], c.name == ^conference_name)
+    |> limit(1)
+    |> Repo.one!()
+  end
 
   @doc """
   Creates a division.

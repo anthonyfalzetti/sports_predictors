@@ -37,6 +37,13 @@ defmodule SportsPredictors.Stadiums do
   """
   def get_stadium!(id), do: Repo.get!(Stadium, id)
 
+  def get_stadium_by_name!(name) do
+    Stadium
+    |> where([s], s.name == ^name)
+    |> limit(1)
+    |> Repo.one!()
+  end
+
   @doc """
   Creates a stadium.
 

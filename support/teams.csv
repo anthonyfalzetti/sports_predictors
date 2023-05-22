@@ -1,0 +1,33 @@
+team,stadium_name,conference,division,elo
+Steelers,Heinz Field,afc,north,1512.3538254868700
+Patriots,Gillette Stadium,afc,east,1545.900207441080
+Chargers,Los Angeles Memorial Coliseum,afc,west,1500.793997303650
+Giants,MetLife Stadium,nfc,east,1353.062263359810
+Bears,Soldier Field,nfc,north,1445.3409490407700
+Chiefs,Arrowhead Stadium,afc,west,1650.6836044401900
+Broncos,Empower Field at Mile High,afc,west,1453.197935527250
+Jets,MetLife Stadium,afc,east,1337.0403936207100
+Saints,Mercedes-Benz Superdome,nfc,south,1562.7347830719400
+Panthers,Bank of America Stadium,nfc,south,1420.892436473400
+Texans,NRG Stadium,afc,south,1395.3068172392000
+Cowboys,AT&T Stadium,nfc,east,1567.7044155441300
+Eagles,Lincoln Financial Field,nfc,east,1495.8420313253500
+Rams,Los Angeles Memorial Coliseum,nfc,west,1640.8302358861900
+49ers,Levi's Stadium,nfc,west,1583.9028944552100
+Buccaneers,Raymond James Stadium,nfc,south,1638.9191452514600
+Cardinals,State Farm Stadium,nfc,west,1530.5593646330000
+Colts,Lucas Oil Stadium,afc,south,1541.7892920070800
+Titans,Nissan Stadium,afc,south,1561.5849654999400
+Falcons,Mercedes-Benz Stadium,nfc,south,1415.2588577130600
+Seahawks,CenturyLink Field,nfc,west,1541.6091744221000
+Raiders,Allegiant Stadium,afc,west,1495.0637915484400
+Browns,FirstEnergy Stadium,afc,north,1501.3057599956700
+Dolphins,Hard Rock Stadium,afc,east,1529.4393038691200
+Vikings,University of Phoenix Stadium,nfc,north,1511.096603537380
+Packers,Lambeau Field,nfc,north,1603.87904766186
+Jaguars,EverBank Field,afc,south,1309.5647066906100
+Lions,Ford Field,nfc,north,1370.8251792241800
+Bills,Bills Stadium,afc,east,1636.6532234533800
+Ravens,M&T Bank Stadium,afc,north,1522.6886031142300
+Bengals,Paul Brown Stadium,afc,north,1542.1636725645400
+Washington,FedExField,nfc,east,1441.925382469030

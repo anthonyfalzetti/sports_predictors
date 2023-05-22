@@ -2,10 +2,12 @@ defmodule SportsPredictors.Divisions.Division do
   use Ecto.Schema
   import Ecto.Changeset
   alias SportsPredictors.Conferences.Conference
+  alias SportsPredictors.Teams.Team
 
   schema "divisions" do
     field(:name, :string)
     belongs_to(:conference, Conference)
+    has_many(:team, Team)
 
     timestamps()
   end
