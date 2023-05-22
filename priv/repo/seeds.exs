@@ -14,9 +14,23 @@ defmodule SportsPredictors.Seeds do
   import SportsPredictors.Seeds.Helper
   alias SportsPredictors.Stadiums
   alias SportsPredictors.Stadiums.Stadium
+  alias SportsPredictors.Conferences.Conference
+  alias SportsPredictors.Divisions.Division
+  alias SportsPredictors.Repo
 
   def seed_all!() do
+    seed_user!()
     seed_stadiums!()
+    seed_conferences!()
+    seed_divisions!()
+  end
+
+  defp seed_user!() do
+    %{
+      email: "anthony.falzetti@gmail.com",
+      password: "P@ssw0rd!"
+    }
+    |> SportsPredictors.Accounts.register_user()
   end
 
   defp seed_stadiums!() do
@@ -34,6 +48,36 @@ defmodule SportsPredictors.Seeds do
       |> Enum.dedup()
       |> Enum.each(fn stadium ->
         Stadiums.create_stadium(stadium)
+      end)
+    end
+  end
+
+  defp seed_conferences!() do
+    if empty?(Conference) do
+      [
+        %{name: "afc"},
+        %{name: "nfc"}
+      ]
+      |> Enum.each(fn conference ->
+        SportsPredictors.Conferences.create_conference(conference)
+      end)
+    end
+  end
+
+  defp seed_divisions!() do
+    if empty?(Division) do
+      Conference
+      |> Repo.all()
+      |> Enum.map(fn conference ->
+        [
+          %{name: "east", conference_id: conference.id},
+          %{name: "north", conference_id: conference.id},
+          %{name: "south", conference_id: conference.id},
+          %{name: "west", conference_id: conference.id}
+        ]
+        |> Enum.each(fn division ->
+          SportsPredictors.Divisions.create_division(division)
+        end)
       end)
     end
   end

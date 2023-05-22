@@ -53,6 +53,7 @@ defmodule SportsPredictors.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:timex, "~> 3.7"},
       {:csv, "~> 2.3"},
+      {:faker, "~> 0.17"},
       {:mix_test_watch, "~> 1.1", only: [:dev, :test], runtime: false}
     ]
   end
